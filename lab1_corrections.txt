@@ -1,0 +1,55 @@
+🟢 Perfect Scores (Correct Logic & Output)
+• Lab 1.2 (Pass): awk '$8 ~ /^5/' correctly isolated all 5xx status codes.
+• Lab 1.3 (Pass): awk '$1 !~ /^10\./' perfectly inverted the match to drop office traffic while safely escaping the period \..
+• Lab 1.7 (Pass): awk '$8>=400 && $8<=499 {print $8}' correctly combined range constraints with logical AND (&&).
+
+
+⚠️ The Broken Labs: Analysis & Corrections
+Lab 1.1: Spot the Defaulters (HTTP 404)
+• Your attempt: awk '!~$1==10/./'
+• The Bug: The operator combination !~ was mixed up with syntax elements from Lab 1.3. Additionally, the lab requested status code 404, which is located in column $8.
+• The Fix: Use exact numeric matching (==) or strict field mapping on column 8:bash
+awk '$8 == 404' brightcart_access.log
+
+
+Lab 1.4: Human Verification
+• Your attempt: awk -F: '$3 >=1000 {print $3}'
+• The Bug: Your math logic is completely sound! However, the prompt asked to print the usernames of real human accounts, which are located in column $1.
+• The Fix: Change the printed variable from $3 to $1:bash
+awk -F: '$3 >= 1000 {print $1}' /etc/passwd
+
+
+Lab 1.5: The Checkout Watch
+• Your attempt: awk '$5=="POST" && $6=="/checkout" {print $5, $6}'
+• The Bug: No output was returned because the double quote character " at the front of "POST is treated as an actual part of the field by awk. Therefore, $5 is literally "POST, not POST.
+• The Fix: Include the embedded quote mark or use a regular expression match (~) to ignore it:bash
+awk '$5 ~ /POST/ && $6 == "/checkout"' brightcart_access.log
+
+
+Lab 1.6: Payload Inspection
+• Your attempt: awk '$9>5009 {print $NF}'
+• The Bug: You filtered using $9 > 5009 instead of checking for bytes strictly greater than 5000. Because of this offset, you missed a log line containing a 5120 byte delivery size.
+• The Fix:bash
+awk '$NF > 5000' brightcart_access.log
+
+
+Lab 1.8: Heavy URI Scan (The Assignment Trap 🚨)
+• Your attempt: awk '$6="admin"'
+• The Critical Bug: Notice how your output changed every single URL path in the log file to read "GET admin HTTP/1.1"? This happened because a single equals sign = overwrites data instead of comparing it. By assigning the string "admin" to $6, you forced awk to rebuild the lines and print them out changed.
+• The Fix: Use a regular expression matching operator (~) to safely search for the term inside the field without writing over it:bash
+awk '$6 ~ /admin/' brightcart_access.log
+
+
+Lab 1.9: Line Length Audit
+• Your attempt: awk 'length($0)>90 {print $0}'
+• The Bug: Syntactically flawless! It returned nothing because none of the lines in your test log sample happen to cross 90 characters long.
+• The Fix: Drop the testing threshold down to 80 to see your operational code generate active terminal feedback against long entries:bash
+awk 'length($0) > 80' brightcart_access.log
+
+
+Lab 1.10: Precise Bot Shield
+• Your attempt: awk '$1==192.168.1.19 {print $1}'
+• The Bug: A tiny typo in the final octet! The instruction targeted IP address 192.168.1.10, but the expression scanned for .19.
+• The Fix: Correct the target match string to display complete line outputs:bash
+awk '$1 == "192.168.1.10"' brightcart_access.log
+
