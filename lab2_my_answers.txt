@@ -4,7 +4,7 @@
 4.awk 'BEGIN {print"----BRIGHTCART BLOG REPORT----"} {print $0}' brightcart_access.log
 5.awk 'BEGIN{print $1||$NF} {print $0}' brightcart_access.log
 6.awk 'BEGIN{OFS="--"} {print $1,$4}' brightcart_access.log
-7.awk END{printLOG SCAN FINISHED} {print /usr/bin/bash} brightcart_access.log
+7.awk 'END{print "LOG SCAN FINISHED"} {print /usr/bin/bash}' brightcart_access.log
 8.awk 'BEGIN { max_limit=4000 } { line[]++ } END { for (l in line) if (line[l] > max_limit) print line[l], l }' brightcart_access.log' 
 9.awk 'END{print FILE HAS BEEN READ. LINES COUNT: ,NR} {print /usr/bin/bash}' brightcart_access.log
 10.awk BEGIN'{print Loading the file...} END{print File has been loaded, total lines count:,NR} {print /usr/bin/bash}' brightcart_access.log
