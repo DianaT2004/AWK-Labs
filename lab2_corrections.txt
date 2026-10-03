@@ -1,0 +1,272 @@
+ ## Grade: **5.5 / 10**
+
+ I'm giving partial credit where you clearly understood the concept but made an AWK/shell syntax mistake.
+
+ | Lab | Score | Why |
+| --- | --- | --- |
+| **2.1** | ❌ 0/1 | Used `NR` instead of required `$NF` |
+| **2.2** | ✅ 1/1 | Correct use of `END` \+ `NR` |
+| **2.3** | ✅ 1/1 | Correctly initialized `FS=":"` in `BEGIN` |
+| **2.4** | ✅ 1/1 | Correct `BEGIN` title |
+| **2.5** | ⚠️ 0.5/1 | Correct idea, but `$1 \|\| $NF` isn't a clean test |
+| **2.6** | ✅ 1/1 | Correct `OFS="--"` and `$1,$4` |
+| **2.7** | ❌ 0/1 | Invalid syntax and only one file |
+| **2.8** | ⚠️ 0.5/1 | Correct logic, but `line[]++` should be `line[$1]++` |
+| **2.9** | ❌ 0/1 | Text wasn't quoted |
+| **2.10** | ❌ 0/1 | Incorrect quoting/syntax |
+
+### 1. Lab 2.1 — ❌
+
+ You wrote:
+
+```
+awk 'BEGIN{print "CLIENT_IP | BYTES"} {print $1, NR}' brightcart_access.log
+```
+
+ Required:
+
+```
+awk 'BEGIN { print "CLIENT_IP | BYTES" } { print $1, $NF }' brightcart_access.log
+```
+
+ Since we now know your log format:
+
+```
+$1  = IP
+$NF = bytes
+```
+
+ You were very close, but `NR` is the **line number**, not bytes.
+
+---
+
+ ### 2. Lab 2.2 — ✅
+
+```
+awk 'END {print NR}' brightcart_access.log
+```
+
+ Perfect.
+
+ Your file has 34 records, so:
+
+```
+34
+```
+
+---
+
+ ### 3\. Lab 2.3 — ✅
+
+```
+awk 'BEGIN { FS=":"} {print $1,$9}' brightcart_access.log
+```
+
+ The important part of the exercise is:
+
+```
+BEGIN { FS=":" }
+```
+
+ You did that correctly.
+
+ I'd normally demonstrate this with `/etc/passwd` because it's actually colon-delimited:
+
+```
+awk 'BEGIN { FS=":" } { print $1, $9 }' /etc/passwd
+```
+
+ But your AWK concept is correct.
+
+---
+
+ ### 4\. Lab 2.4 — ✅
+
+```
+awk 'BEGIN {print"----BRIGHTCART BLOG REPORT----"} {print $0}' brightcart_access.log
+```
+
+ Correct.
+
+ `BEGIN` prints the title **before** the log records.
+
+---
+
+ ### 5\. Lab 2.5 — ⚠️
+
+ You wrote:
+
+```
+awk 'BEGIN{print $1||$NF} {print $0}' brightcart_access.log
+```
+
+ Your understanding is actually good here: you're testing whether fields exist inside `BEGIN`.
+
+ The problem is:
+
+```
+$1 || $NF
+```
+
+ is a **logical OR operation**.
+
+ A clearer answer would be:
+
+```
+awk 'BEGIN { print "First:", $1, "Last:", $NF } { print $0 }' brightcart_access.log
+```
+
+ The important lesson:
+
+```
+BEGIN
+  ↓
+No input record yet
+  ↓
+$1 and $NF aren't populated from the file
+```
+
+ Partial credit.
+
+---
+
+ ### 6\. Lab 2.6 — ✅
+
+```
+awk 'BEGIN{OFS="--"} {print $1,$4}' brightcart_access.log
+```
+
+ Perfect.
+
+ You correctly understood that:
+
+```
+OFS="--"
+```
+
+ controls the separator **between values printed by the same `print` statement**.
+
+ So:
+
+```
+print $1,$4
+```
+
+ becomes:
+
+```
+203.0.113.14--[14/Mar/2026:09:12:03]
+```
+
+---
+
+ ### 7\. Lab 2.7 — ❌
+
+ You wrote:
+
+```
+awk END{printLOG SCAN FINISHED} {print /usr/bin/bash} brightcart_access.log
+```
+
+ This has multiple syntax issues.
+
+ The basic requirement is:
+
+```
+awk 'END { print "LOG SCAN FINISHED" }' brightcart_access.log second.log
+```
+
+ Notice there are **two files**.
+
+ The `END` block executes after both have been processed.
+
+---
+
+ ### 8\. Lab 2.8 — ⚠️
+
+ You wrote:
+
+```
+{ line[]++ }
+```
+
+ This is the main mistake.
+
+ You need to specify **what you're counting**:
+
+```
+{ line[$1]++ }
+```
+
+ Then:
+
+```
+awk 'BEGIN { max_limit=4000 } { line[$1]++ } END { for (l in line) if (line[l] > max_limit) print line[l], l }' brightcart_access.log
+```
+
+ Your understanding of `max_limit` and the `END` filtering was good.
+
+---
+
+ ### 9\. Lab 2.9 — ❌
+
+ You wrote:
+
+```
+print FILE HAS BEEN READ. LINES COUNT: ,NR
+```
+
+ AWK interprets `FILE`, `HAS`, etc. as things rather than a text string.
+
+ Use quotes:
+
+```
+awk 'END { print "FILE HAS BEEN READ. LINES COUNT:", NR }' brightcart_access.log
+```
+
+---
+
+ ### 10\. Lab 2.10 — ❌
+
+ You were trying to do the right structure:
+
+```
+BEGIN → loading message
+process records
+END → completion message + NR
+```
+
+ But your quoting was broken.
+
+ Correct:
+
+```
+awk 'BEGIN { print "Loading the file..." } { print $0 } END { print "File has been loaded, total lines count:", NR }' brightcart_access.log
+```
+
+ The important structure is:
+
+```
+BEGIN { ... }
+{ ... }
+END { ... }
+```
+
+ ## What I think you actually understand
+
+ Your **conceptual understanding is better than 5.5/10**.
+
+ You seem to understand:
+
+ - `BEGIN` → runs before the input
+- `END` → runs after the input
+- `NR` → record/line count
+- `$1` → first field
+- `$NF` → last field
+- `FS` → input separator
+- `OFS` → output separator
+- arrays like `line[$1]++` → counting things
+
+ Your biggest weakness right now is **AWK syntax/quoting**, not the underlying concepts.
+
+ If this were a practical lab where I gave substantial partial credit for understanding, I'd say you're around **6–7/10 in understanding**, but **5.5/10 on the submitted commands**.

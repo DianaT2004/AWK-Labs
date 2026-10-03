@@ -1,0 +1,22 @@
+Topic 1: Choosing Which Lines to Look At (Filtering)
+Focus: Isolating rows using exact matches, regex, anchors, and numeric ranges [1].
+• Lab 1.1: Spot the Defaulters
+Print all log lines from brightcart_access.log where the HTTP status code is exactly 404.
+• Lab 1.2: Catch All Server Meltdowns
+Write a command using a regular expression anchor (/^5/) to find every 5xx server error (500, 502, 503, 504) in one go.
+• Lab 1.3: Exclude Office Traffic
+Filter out all internal network traffic originating from IP addresses starting with 10. using the !~ operator.
+• Lab 1.4: Human Verification
+Use the system roster template (/etc/passwd) split by colons (-F:) to print lines where the User ID ($3) is greater than or equal to 1000.
+• Lab 1.5: The Checkout Watch
+Print all rows where the HTTP request method is explicitly a POST request to the /checkout endpoint.
+• Lab 1.6: Payload Inspection
+Isolate rows where the response size in bytes ($NF) is strictly larger than 5000 bytes.
+• Lab 1.7: The Underworld Range
+Using logical operators (&&), display lines where the HTTP status code resides within the 400 to 499 range (client errors).
+• Lab 1.8: Heavy URI Scan
+Print rows where the path requested contains the literal phrase admin.
+• Lab 1.9: Line Length Audit
+Locate lines in the log that are suspicious or deformed by selecting lines that contain more than 90 total characters.
+• Lab 1.10: The Precise Bot Shield
+Isolate only requests originating exactly from the local IP 192.168.1.10.

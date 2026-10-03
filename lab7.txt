@@ -1,0 +1,22 @@
+Topic 7: String Tools (Cutting, Searching, Replacing)
+Focus: String slicing with substr, token production via split, substitutions (sub/gsub), and match boundaries [1].
+• Lab 7.1: Timestamp Extraction
+Isolate the date block out of $4 (e.g., [14/Mar/2026...) using substr to extract just the 2-digit day.
+• Lab 7.2: Splitting Time Formats
+Break apart column 4 by colons using the split() function to capture and print out the hour entry field into a temporary array.
+• Lab 7.3: Global Unit Removal
+Clean up sensor readings by running gsub(/%RH/, "") to strip all unit annotations across an input data block.
+• Lab 7.4: Regex Boundary Catching
+Use the match() function with a regular expression for IP shapes to capture the string segment, printing out RSTART and RLENGTH.
+• Lab 7.5: Literal Substring Index Location
+Find out exactly where the word checkout begins on lines using the non-regex index() tool, skipping rows where it returns 0.
+• Lab 7.6: Cleaning Bracket Wrappers
+Use the sub() function to find and strip away the opening bracket character (\[) located at the front of your timestamp data column.
+• Lab 7.7: Targeted Resource Replacement
+Swap out all log occurrences of the path /cart with /shopping-cart via a substitution filter before printing the line.
+• Lab 7.8: Pulling the Month Variable
+Combine substr() slicing parameters with precise offset numbers to isolate the three-letter month name from column 4.
+• Lab 7.9: Truncating Over-extended Lines
+Implement a safety formatter string slice that prints only the first 40 characters of a text field if it crosses a maximum threshold.
+• Lab 7.10: Double Segment Splitting
+Use a sequence of two consecutive split() calls to extract the HTTP protocol version out of the trailing request string block.

@@ -1,0 +1,22 @@
+Topic 4: print, printf, and Rebuilding Lines ($1=$1)
+Focus: Advanced alignment styling, controlling row padding, and triggering record line manipulation via OFS updates [1].
+• Lab 4.1: Left-Aligned String Columns
+Use printf with %-15s alignment formatting to output clean, even margins for the log's IP column paths.
+• Lab 4.2: Padded Integer Margins
+Format the response payload field using %5d to guarantee right-aligned number spacing for varying byte metrics.
+• Lab 4.3: Explicit Newlines Integration
+Construct a printf sequence showing IP blocks and status codes, deliberately appending the literal \n sequence to prevent text bunching.
+• Lab 4.4: CSV Spreadsheet Export
+Set OFS="," inside a BEGIN block, execute a mock field assignment ($1=$1), and use 1 to output the entire log as a CSV.
+• Lab 4.5: Space Consolidation Trick
+Take an unaligned line containing multiple uneven consecutive spaces, run $1=$1, and observe how awk normalizes them to single spaces.
+• Lab 4.6: Pipe-Delimited Generation
+Modify OFS to a vertical pipe character (|), trigger a line rebuild via a subfield rewrite, and output the customized structure.
+• Lab 4.7: Fixed-Width Dash Barriers
+Use printf formatting masks to build a visual line separator made out of dashes across your terminal viewport.
+• Lab 4.8: Selective Multi-Column Squeeze
+Rebuild a row layout after intentionally blanking out $2 and $3, showing how line regeneration closes field gaps.
+• Lab 4.9: Tabular Output Conversions
+Alter the OFS framework to use literal tab notations (\t), outputting server log dumps directly tailored for spreadsheet pasting.
+• Lab 4.10: Mixing Flags with String Padding
+Design a printf dashboard showing: IP addresses (left-aligned), status numbers (centered/padded), and bytes values.

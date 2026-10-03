@@ -1,0 +1,22 @@
+Topic 3: Doing Arithmetic & The +0 Trick
+Focus: Running sums, averages, and stripping non-numeric suffixes to force computational conversion [1].
+• Lab 3.1: Grand Total Traffic
+Compute and print the total number of bytes served across the entire log file by compounding values onto a cumulative variable.
+• Lab 3.2: Bandwidth Averaging
+Calculate the mathematical average of bytes sent per request by dividing your cumulative sum by NR inside an END block.
+• Lab 3.3: Stripping Greenhouse Suffixes
+Simulate a sensor report where humidity values are written as 63%RH. Use the +0 trick to turn these values into clear integers.
+• Lab 3.4: Overlapping Disk space Metrics
+Simulate parsing df -h data where column sizes read as 51%. Force text-to-number execution to target filesystems exceeding 50%.
+• Lab 3.5: Error Percentage Counter
+Calculate what percentage of your total log interactions ended in a 5xx series failure.
+• Lab 3.6: Payload Doubling Matrix
+Print the original byte payload size alongside a column showing what that value would be if doubled ($NF * 2).
+• Lab 3.7: Scale Reduction
+Convert the raw trailing byte output sizes from bytes into Kilobytes (KB) by dividing the value by 1024 on the fly.
+• Lab 3.8: Incremental Incident Marker
+Create a standalone tracking variable that increments by 1 only when a 404 status code is encountered, printing the running count.
+• Lab 3.9: Filtering with Clean Math Expressions
+Filter out any server transactions where the payload response size is exactly equal to zero.
+• Lab 3.10: The Empty Field Reset
+Add +0 to a completely blank or uninitialized column variable to verify that awk naturally defaults its empty string behavior to 0.

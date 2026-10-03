@@ -1,0 +1,23 @@
+Topic 6: Arrays (Cross-Line Memory)
+Focus: Associative key tracking, grouping frequencies, multi-file verification mappings (FNR==NR) [1].
+• Lab 6.1: Tracking Status Code Frequency
+Build a profile counting array (count[$8]++) to tally occurrences of each status code, printing the results in an END block.
+• Lab 6.2: Mapping IP Footprints
+Tally how many individual hits every distinct IP address makes against your server throughout the timeframe of the log.
+• Lab 6.3: Associative Key Iteration
+Create an tracking array and use a for (key in array) loop inside the END block to cleanly enumerate all discovered unique keys.
+• Lab 6.4: The Approved Partner Filter (FNR==NR)
+Load the partners.txt list (file_5cj6sZ) into memory, and print log lines from brightcart_access.log that match an approved partner IP.
+• Lab 6.5: Bandwidth Consumers by IP
+Create an array that sums up total bytes sent (sum[$1] += $9) to identify which client addresses consume the most server bandwidth.
+• Lab 6.6: Identifying Endpoint Hotspots
+Track resource popularity by aggregating hit numbers mapped to the URL path column field.
+• Lab 6.7: Unapproved IP Watch
+Invert your two-file array matching script logic to print log lines from IPs that are not present inside partners.txt.
+• Lab 6.8: Unique Visited Routes per Client
+Generate an array multi-key index combining the visitor IP and the requested page to track unique site resource accesses.
+• Lab 6.9: Tracking the First Incident of an Error
+Save the line timestamp into an array named first_seen[$8] only if that specific error key hasn't been instantiated yet.
+• Lab 6.10: Cross-Checking File Discrepancy Counts
+Calculate the total number of lines processed inside the primary tracking block versus tracking blocks mapped specifically to secondary data inputs.
+

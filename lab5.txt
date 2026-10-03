@@ -1,0 +1,22 @@
+Topic 5: Making Decisions and Loops
+Focus: Conditional branching, checking arrays, building iterative sequences, and managing flow controls via next or exit [1].
+• Lab 5.1: Threat Classification Flags
+Write an if / else tree identifying status codes: codes >=500 print CRITICAL, >=400 print WARNING, others print OK.
+• Lab 5.2: One-Line Ternary Check
+Squeeze a logic check onto a single line to flag bytes sizes over 1000 with the label LARGE, otherwise printing SMALL.
+• Lab 5.3: Field-by-Field Breakdown
+On the first line (NR==1), use a standard for loop to step through every single field variable up to NF and print them on distinct lines.
+• Lab 5.4: While-Loop Field Dump
+Recreate the previous field-by-field breakdown exercise, replacing the for statement syntax with an equivalent while loop.
+• Lab 5.5: Short-Circuit Info Lines
+Optimize a log processor by evaluating if an incoming IP address equals internal metrics; if true, use next to bypass processing.
+• Lab 5.6: Hard Ceiling Interruption
+Scan the access log rows for a fatal server error; the moment you find one, use the exit statement to halt all program execution.
+• Lab 5.7: Multi-Conditional Tracking
+Combine checks using an if statement to highlight interactions that are both a POST method and resulted in a 200 success code.
+• Lab 5.8: Reverse Fields Loop
+Write a looping construct that evaluates a record row and prints its fields out in reverse order (from NF down to 1).
+• Lab 5.9: Skip Header Operations
+Use a shortcut condition check built around NR to completely skip over row processing for line item 1.
+• Lab 5.10: Bound Increment Interrupter
+Construct a loop tracking variable index offsets that breaks processing if index criteria limits cross explicit local safe values.

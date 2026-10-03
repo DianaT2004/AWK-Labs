@@ -1,0 +1,22 @@
+Topic 2: BEGIN and END Blocks
+Focus: Executing setup steps before stream parsing and generating metrics summary tables after processing [1].
+• Lab 2.1: Structured Headers
+Use a BEGIN block to print a top row header displaying CLIENT_IP | BYTES before listing out $1 and $NF for all rows.
+• Lab 2.2: Final Line Audit
+Process the log file normally and use an END block to print out the final record count using the built-in NR variable.
+• Lab 2.3: Self-Contained Separators
+Instead of using -F:, set up a script that declares FS = ":" inside a BEGIN block to cleanly parse colon-delimited user files.
+• Lab 2.4: Title Card Formatting
+Print a decorative title block (e.g., --- BRIGHTCART LOG REPORT ---) at the start of your terminal output using BEGIN.
+• Lab 2.5: Zero-State Verification
+Test what happens when you print $1 or $NF inside a BEGIN block to confirm that file records are not yet accessible.
+• Lab 2.6: Custom Field Separators on Output
+Set the Output Field Separator (OFS) to a double hyphen -- inside a BEGIN block and print out columns 1 and 4.
+• Lab 2.7: Multi-File Bound Check
+Print a marker indicating "LOG SCAN FINISHED" only after processing both files passed to the command line.
+• Lab 2.8: Initializing State Variables
+Explicitly define a starting benchmark variable inside BEGIN (e.g., max_limit = 4000) and print lines exceeding that explicit limit.
+• Lab 2.9: Footnote Metrics
+Use END to output a stylized summary note indicating the termination line placement of your stream analyzer.
+• Lab 2.10: The Combined Sandwich Wrap
+Build a command that uses both a BEGIN block for columns initialization and an END block to print a completion confirmation string.
